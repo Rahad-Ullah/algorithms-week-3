@@ -31,6 +31,23 @@ void bellman_ford(int n)
             }
         }
     }
+
+    for (auto edge : edge_list)
+    {
+        int a = edge.a;
+        int b = edge.b;
+        int c = edge.c;
+        if (dis[a] != INT_MAX && dis[a] + c < dis[b])
+        {
+            cout << "Negative cycle detected" << endl;
+            return;
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << i << "--> " << dis[i] << endl;
+    }
 }
 
 int main()
@@ -54,11 +71,6 @@ int main()
     dis[0] = 0;
 
     bellman_ford(n);
-
-    for (int i = 0; i < n; i++)
-    {
-        cout << i << "--> " << dis[i] << endl;
-    }
 
     return 0;
 }
