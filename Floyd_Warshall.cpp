@@ -57,5 +57,15 @@ int main()
         cout << endl;
     }
 
+    // detect negative cycle
+    for (int i = 0; i < n; i++)
+    {
+        if (adj_matrix[i][i] < 0)
+        {
+            cout << "Negative cycle detected!" << endl;
+            break;
+        }
+    }
+
     return 0;
 }
