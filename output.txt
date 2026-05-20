@@ -1,1 +1,4 @@
-Negative cycle detected
+0 3 5 8 
+@ 0 2 5 
+@ @ 0 @ 
+@ @ @ 0 
