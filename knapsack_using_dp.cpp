@@ -1,21 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 int val[100], weight[100];
+int dp[100][100];
 
 int knapsack(int i, int mx_weight)
 {
     if (i < 0 || mx_weight <= 0)
         return 0;
 
+    if (dp[i][mx_weight] != -1)
+        return dp[i][mx_weight];
+
     if (weight[i] <= mx_weight)
     {
         int opt1 = knapsack(i - 1, mx_weight - weight[i]) + val[i];
         int opt2 = knapsack(i - 1, mx_weight);
-        return max(opt1, opt2);
+        dp[i][mx_weight] = max(opt1, opt2);
+        return dp[i][mx_weight];
     }
     else
     {
-        return knapsack(i - 1, mx_weight);
+        dp[i][mx_weight] = knapsack(i - 1, mx_weight);
+        return dp[i][mx_weight];
     }
 }
 
@@ -29,6 +35,10 @@ int main()
     for (int i = 0; i < n; i++)
         cin >> weight[i];
     cin >> mx_weight;
+
+    for (int i = 0; i < 100; i++)
+        for (int j = 0; j < 100; j++)
+            dp[i][j] = -1;
 
     cout << knapsack(n - 1, mx_weight) << endl;
 
